@@ -1,0 +1,28 @@
+# Create CD-Group infrastructure instances and disks
+- name: launch a compute instances for CD Group infrastructure
+  hosts: localhost
+  gather_facts: false # don't gather facts on local host
+  vars:
+    volume_name: "source control"
+  tasks:
+  - name: create source control instance
+    os_server:
+       state: present
+       # set OpenStack auth environment variables using RC file: 
+       # http://docs.openstack.org/cli-reference/common/cli-set-environment-variables-using-openstack-rc.html
+       name: source-control
+       image: "Ubuntu 14.04"     # choose an image that has python installed
+       key_name: "{{ os_key }}"
+       flavor: m1.small
+       network: "{{ os_network }}"
+       floating_ips: [10.96.11.127]
+       volumes:
+       - "{{ volume_name }}" 
+  - name: create authentication instance (LDAP server)
+    os_server:
+       state: present
+       name: auth 
+       image: "Ubuntu 14.04"
+       key_name: "{{ os_key }}"
+       flavor: m1.small
+       network: "{{ os_network }}"
