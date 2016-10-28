@@ -5,3 +5,15 @@
        update_cache=yes
   with_items:
     - nginx
+
+- name: Add kafka-manager
+  become: yes
+  template: src="kafka-manager.conf"
+            dest="/etc/nginx/sites-available/kafka-manager"
+
+- name: Link kafka-manager
+  become: yes
+  file: src=/etc/nginx/sites-available/kafka-manager
+        dest=/etc/nginx/sites-enabled/kafka-manager
+        state=link
+            
