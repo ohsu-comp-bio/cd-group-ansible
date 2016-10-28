@@ -16,4 +16,13 @@
   file: src=/etc/nginx/sites-available/kafka-manager
         dest=/etc/nginx/sites-enabled/kafka-manager
         state=link
-            
+
+- name: Add kafka-monitor
+  become: yes
+  template: src="kafka-monitor.conf"
+            dest="/etc/nginx/sites-available/kafka-monitor"
+
+- name: Link kafka-monitor
+  become: yes
+  file: src=/etc/nginx/sites-available/kafka-monitor
+        dest=/etc/nginx/sites-enabled/kafka-monitor           
