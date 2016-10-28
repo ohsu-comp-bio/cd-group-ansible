@@ -6,7 +6,7 @@
   with_items:
     - nginx
 
-- name: Add kafka-manager
+- name: Add kafka-manager site
   become: yes
   template: src="kafka-manager.conf"
             dest="/etc/nginx/sites-available/kafka-manager"
@@ -17,7 +17,7 @@
         dest=/etc/nginx/sites-enabled/kafka-manager
         state=link
 
-- name: Add kafka-monitor
+- name: Add kafka-monitor site
   become: yes
   template: src="kafka-monitor.conf"
             dest="/etc/nginx/sites-available/kafka-monitor"
@@ -25,4 +25,27 @@
 - name: Link kafka-monitor
   become: yes
   file: src=/etc/nginx/sites-available/kafka-monitor
-        dest=/etc/nginx/sites-enabled/kafka-monitor           
+        dest=/etc/nginx/sites-enabled/kafka-monitor
+        state=link
+
+- name: Add wiki site
+  become: yes
+  template: src="wiki.conf"
+            dest="/etc/nginx/sites-available/wiki"
+
+- name: Link wiki
+  become: yes
+  template: src=/etc/nginx/sites-available/wiki
+            dest=/etc/nginx/sites-enabled/wiki
+            state=link
+
+- name: Add kibana testing site
+  become: yes
+  template: src="kibana.conf"
+            dest="/etc/nginx/sites-available/kibana"
+
+- name: Link kibana
+  become: yes
+  template: src=/etc/nginx/sites-available/kibana
+            dest="/etc/nginx/sites-enabled/kibana"
+            state=link
