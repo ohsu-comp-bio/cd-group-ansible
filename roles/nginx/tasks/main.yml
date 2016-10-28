@@ -16,6 +16,7 @@
   file: src=/etc/nginx/sites-available/kafka-manager
         dest=/etc/nginx/sites-enabled/kafka-manager
         state=link
+  notify: restart nginx
 
 - name: Add kafka-monitor site
   become: yes
@@ -27,6 +28,7 @@
   file: src=/etc/nginx/sites-available/kafka-monitor
         dest=/etc/nginx/sites-enabled/kafka-monitor
         state=link
+  notify: restart nginx
 
 - name: Add wiki site
   become: yes
@@ -38,6 +40,7 @@
   template: src=/etc/nginx/sites-available/wiki
             dest=/etc/nginx/sites-enabled/wiki
             state=link
+  notify: restart nginx
 
 - name: Add kibana testing site
   become: yes
@@ -49,3 +52,4 @@
   template: src=/etc/nginx/sites-available/kibana
             dest="/etc/nginx/sites-enabled/kibana"
             state=link
+  notify: restart nginx
