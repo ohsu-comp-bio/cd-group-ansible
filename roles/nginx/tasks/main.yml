@@ -1,0 +1,7 @@
+
+- name: Update and install nginx
+  apt: pkg={{ item }}
+       state=installed
+       update_cache=yes
+  with_items:
+    - nginx
