@@ -37,9 +37,9 @@
 
 - name: Link wiki
   become: yes
-  template: src=/etc/nginx/sites-available/wiki
-            dest=/etc/nginx/sites-enabled/wiki
-            state=link
+  file: src=/etc/nginx/sites-available/wiki
+        dest=/etc/nginx/sites-enabled/wiki
+        state=link
   notify: restart nginx
 
 - name: Add kibana testing site
@@ -49,7 +49,7 @@
 
 - name: Link kibana
   become: yes
-  template: src=/etc/nginx/sites-available/kibana
-            dest="/etc/nginx/sites-enabled/kibana"
-            state=link
+  file: src=/etc/nginx/sites-available/kibana
+        dest="/etc/nginx/sites-enabled/kibana"
+        state=link
   notify: restart nginx
