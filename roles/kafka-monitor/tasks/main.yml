@@ -6,9 +6,13 @@
   with_items:
     - nodejs
     - npm
+    - nodejs-legacy
 
 - name: Install bower
   npm: name=bower global=yes
+
+#- name: Point to node executable
+#  command: ln -s /usr/bin/nodejs /usr/bin/node
 
 - name: Configure waf
   command: ./waf configure chdir=/mnt/git/kafka-simple-monitor/
