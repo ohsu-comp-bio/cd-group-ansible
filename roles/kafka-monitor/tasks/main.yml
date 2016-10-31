@@ -35,3 +35,15 @@
 - name: Build waf
   become: no
   command: ./waf build chdir=/mnt/git/kafka-simple-monitor/
+
+- name: Ensure log directory exists
+  become: yes
+  file: path=/var/log/kafka_mon state=directory
+
+- name: Ensure log file exists
+  become: yes
+  file: path=/var/log/kafka_mon/kafka_mon.log state=touch
+
+- name: Run kafka-monitor
+  become: yes
+  command: uwsgi --ini kafka_mon.ini & chdir=/mnt/git/kafka-simple-monitor/build/app
