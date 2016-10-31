@@ -6,6 +6,18 @@
   with_items:
     - nginx
 
+- name: Add index site
+  become: yes
+  template: src="index.conf"
+            dest="/etc/nginx/sites-available/default"
+
+- name: Link index
+  become: yes
+  file: src=/etc/nginx/sites-available/default
+        dest=/etc/nginx/sites-enabled/default
+        state=link
+  notify: restart nginx
+
 - name: Add kafka-manager site
   become: yes
   template: src="kafka-manager.conf"
