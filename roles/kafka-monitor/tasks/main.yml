@@ -15,13 +15,13 @@
 - name: Install bower
   npm: name=bower global=yes
 
-- name: Install virtualenv
-  pip: name=virtualenv
+#- name: Install virtualenv
+#  pip: name=virtualenv
 
 - name: Install uwsgi
   pip: requirements=/mnt/git/kafka-simple-monitor/requirements.txt
-       virtualenv=/mnt/git/kafka-simple-monitor/venv
-       virtualenv_python=python2.7
+#       virtualenv=/mnt/git/kafka-simple-monitor/venv
+#       virtualenv_python=python2.7
 
 - name: Set kafka-monitor ownership to ubuntu
   file: path=/mnt/git/kafka-simple-monitor 
