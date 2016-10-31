@@ -11,11 +11,12 @@
 - name: Install bower
   npm: name=bower global=yes
 
-#- name: Point to node executable
-#  command: ln -s /usr/bin/nodejs /usr/bin/node
+- name: Set kafka-monitor ownership to ubuntu
+  file: path=/mnt/git/kafka-simple-monitor owner=ubuntu group=ubuntu
 
 - name: Configure waf
   command: ./waf configure chdir=/mnt/git/kafka-simple-monitor/
 
 - name: Build waf
-  command: ./waf build --allow-root chdir=/mnt/git/kafka-simple-monitor/
+  become: no
+  command: ./waf build chdir=/mnt/git/kafka-simple-monitor/
