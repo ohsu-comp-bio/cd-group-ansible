@@ -10,7 +10,6 @@
     - npm
     - nodejs-legacy
     - python-pip
-    - virtualenv
     - uwsgi-plugin-python
 
 - name: Install bower
