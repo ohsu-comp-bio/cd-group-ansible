@@ -20,7 +20,7 @@
 
 - name: Install uwsgi
   pip: name=uwsgi
-       virtualenv=/mnt/git/kafka-simple-monitor
+       virtualenv=/mnt/git/kafka-simple-monitor/venv
        virtualenv_python=python2.7
 
 - name: Set kafka-monitor ownership to ubuntu
