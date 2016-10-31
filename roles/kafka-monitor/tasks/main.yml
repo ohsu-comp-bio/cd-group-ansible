@@ -11,14 +11,18 @@
     - nodejs-legacy
     - python-pip
     - virtualenv
+    - uwsgi-plugin-python
 
 - name: Install bower
   npm: name=bower global=yes
 
-- name: Install uwsgi
-  pip: name=uwsgi
-       virtualenv=/mnt/git/kafka-simple-monitor
-       virtualenv_python=python2.7
+- name: Install virtualenv
+  pip: name=virtualenv
+
+#- name: Install uwsgi
+#  pip: name=uwsgi
+#       virtualenv=/mnt/git/kafka-simple-monitor
+#       virtualenv_python=python2.7
 
 - name: Set kafka-monitor ownership to ubuntu
   file: path=/mnt/git/kafka-simple-monitor 
