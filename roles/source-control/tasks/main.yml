@@ -1,4 +1,12 @@
 
+- name: Install git
+  become: yes
+  apt: pkg={{ item }}
+       state=installed
+       update_cache=yes
+  with_items:
+    - git
+
 - name: Need SSH key
   become: yes
   copy: src=~/.ssh/cdgroup.pem 
