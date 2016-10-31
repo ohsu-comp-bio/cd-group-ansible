@@ -1,21 +1,22 @@
 
-- name: Provision nginx
+
+- name: Download repos
   hosts: portal-main
   become: yes
   gather_facts: no
   roles:
-    - nginx
-
-- name: Download repos
-  hosts: portal-main
-  become: yes 
-  gather_facts: no
-  roles: 
     - source-control
 
 - name: Configure kafka-monitor
   hosts: portal-main
   become: yes
   gather_facts: no
-  roles: 
+  roles:
     - kafka-monitor
+
+- name: Provision nginx
+  hosts: portal-main
+  become: yes
+  gather_facts: no
+  roles:
+    - nginx
