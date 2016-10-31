@@ -13,7 +13,7 @@
   roles: 
     - source-control
 
-- namr Configure kafka-monitor
+- name: Configure kafka-monitor
   hosts: portal-main
   become:yes
   gather_facts: no
