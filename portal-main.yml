@@ -12,3 +12,10 @@
   gather_facts: no
   roles: 
     - source-control
+
+- namr Configure kafka-monitor
+  hosts: portal-main
+  become:yes
+  gather_facts: no
+  roles: 
+    - kafka-monitor

@@ -1,0 +1,17 @@
+
+- name: Install NPM
+  apt: pkg={{ item }}
+       state=installed
+       update_cache=yes
+  with_items:
+    - nodejs
+    - npm
+
+- name: Install bower
+  npm: name=bower global=yes
+
+- name: Configure waf
+  command: /mnt/git/kafka-simple-monitor/waf configure
+
+- name: Build waf
+  command: mnt/git/kafka-simple-monitor/waf build
