@@ -8,6 +8,6 @@
         mode=0644
 
 - name: Download main portal repos
-  git: repo= "ssh://ubuntu@source-control:/mnt/git/portal_html.git" 
-       dest= "/mnt/git/"
+  git: repo=ssh://ubuntu@source-control:/mnt/git/portal_html.git 
+       dest=/mnt/git/
        key_file=~/.ssh/cdgroup.pem
