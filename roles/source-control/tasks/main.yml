@@ -20,3 +20,4 @@
   git: repo=ubuntu@10.60.60.103:/mnt/git/portal_html.git
        dest=/mnt/git/
        key_file=~/.ssh/cdgroup.pem
+       accept_hostkey=yes
