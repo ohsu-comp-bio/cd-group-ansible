@@ -18,4 +18,5 @@
   command: ./waf configure chdir=/mnt/git/kafka-simple-monitor/
 
 - name: Build waf
+  become: no
   command: ./waf build chdir=/mnt/git/kafka-simple-monitor/
