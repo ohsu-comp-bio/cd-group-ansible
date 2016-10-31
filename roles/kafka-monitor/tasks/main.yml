@@ -7,6 +7,7 @@
     - nodejs
     - npm
     - nodejs-legacy
+    - python-pip
 
 - name: Install bower
   npm: name=bower global=yes
