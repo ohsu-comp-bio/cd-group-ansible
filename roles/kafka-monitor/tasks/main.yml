@@ -11,7 +11,7 @@
   npm: name=bower global=yes
 
 - name: Configure waf
-  command: /mnt/git/kafka-simple-monitor/waf configure
+  command: ./waf configure chdir=/mnt/git/kafka-simple-monitor/
 
 - name: Build waf
-  command: mnt/git/kafka-simple-monitor/waf build
+  command: ./waf build chdir=/mnt/git/kafka-simple-monitor/
