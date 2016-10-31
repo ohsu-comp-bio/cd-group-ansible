@@ -4,6 +4,8 @@
        state=installed
        update_cache=yes
   with_items:
+    - build-essential
+    - python-dev
     - nodejs
     - npm
     - nodejs-legacy
