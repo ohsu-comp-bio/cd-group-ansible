@@ -1,0 +1,13 @@
+
+- name: Need SSH key
+  become: yes
+  copy: src=~/.ssh/cdgroup.pem 
+        dest=~/.ssh/cdgroup.pem
+        owner=root
+        group=root
+        mode=0644
+
+- name: Download main portal repos
+  git: repo= "ssh://ubuntu@source-control:/mnt/git/portal_html.git" 
+       dest= "/mnt/git/"
+       key_file=~/.ssh/cdgroup.pem
