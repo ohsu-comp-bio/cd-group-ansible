@@ -20,6 +20,7 @@
 
 - name: Install uwsgi
   pip: name=uwsgi
+       requirements=/mnt/git/kafka-simple-monitor/requirements.txt
        virtualenv=/mnt/git/kafka-simple-monitor/venv
        virtualenv_python=python2.7
 
