@@ -44,6 +44,11 @@
   become: yes
   file: path=/var/log/kafka_mon/kafka_mon.log state=touch
 
+- name: FIx unnecessary plugin issue
+  lineinfile: dest="/mnt/git/kafka-simple-monitor/build/app/kafka_mon.ini" 
+              regexp="^plugin"
+              line="#plugin = python"
+
 - name: Run kafka-monitor
   become: yes
   command: uwsgi --ini kafka_mon.ini & chdir=/mnt/git/kafka-simple-monitor/build/app
