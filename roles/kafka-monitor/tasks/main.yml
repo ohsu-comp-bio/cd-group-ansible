@@ -12,7 +12,10 @@
   npm: name=bower global=yes
 
 - name: Set kafka-monitor ownership to ubuntu
-  file: path=/mnt/git/kafka-simple-monitor owner=ubuntu group=ubuntu
+  file: path=/mnt/git/kafka-simple-monitor 
+        owner=ubuntu 
+        group=ubuntu
+        recurse=yes
 
 - name: Configure waf
   command: ./waf configure chdir=/mnt/git/kafka-simple-monitor/
