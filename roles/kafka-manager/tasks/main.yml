@@ -1,10 +1,10 @@
 
-#- name: Install items
-#  apt: pkg={{ item }}
-#       state=installed
-#       update_cache=yes
-#  with_items:
-#    - unzip
+- name: Install items
+  apt: pkg={{ item }}
+       state=installed
+       update_cache=yes
+  with_items:
+    - unzip
 
 - name: Ensure directory exists
   file: path=/mnt/dist/ state=directory
@@ -22,7 +22,9 @@
   command: mv kafka-manager-1.3.1.6 kafka-manager-tar chdir=/mnt/dist
 
 - name: Make bin
-  command: ./sbt clean dist chdir=/mnt/dist/kafka-manager-tar
+  command: ./sbt clean dist 
+           chdir=/mnt/dist/kafka-manager-tar
+           creates=./target/universal/kafka-manager-1.3.1.6.zip
 
 - name: Grab bin
   copy: remote_src=True
