@@ -50,3 +50,7 @@
   lineinfile: dest="/mnt/dist/kafka-manager/conf/application.conf"
               regexp="^kafka-manager.zkhosts"
               line='kafka-manager.zkhosts="10.96.11.92:2181"'
+
+- name: Alter Kafka-manager routes
+  template: src="routes.conf"
+            dest="/mnt/dist/kafka-manager/conf/routes"
