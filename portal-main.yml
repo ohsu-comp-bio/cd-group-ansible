@@ -6,6 +6,7 @@
   gather_facts: no
   roles:
     - source-control
+    - kafka-manager
 
 - name: Configure kafka-monitor
   hosts: portal-main

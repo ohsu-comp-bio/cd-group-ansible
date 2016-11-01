@@ -1,0 +1,9 @@
+
+- name: Download kafka-manager tarball
+  get_url: url=https://github.com/yahoo/kafka-manager/archive/1.3.1.6.tar.gz
+           dest=/mnt/dist/
+
+- name: Unarchive the dist
+  unarchive: src=/mnt/dist/kafka-manager-1.3.1.6.tar.gz
+             dest=/mnt/dist/kafka-manager
+             copy=no

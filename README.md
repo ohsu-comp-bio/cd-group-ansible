@@ -7,6 +7,8 @@ ansible-playbook -i config/hosts portal-main.yml
 
 ssh portal-main
 
-sudo uwsgi --ini /mnt/git/kafka-simple-monitor/build/app/kafka_mon.ini &
+cd /mnt/git/kafka-simple-monitor/build/app/
 
+sudo uwsgi --ini kafka_mon.ini &
 
+close terminal
