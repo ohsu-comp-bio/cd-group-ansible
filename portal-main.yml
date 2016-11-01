@@ -1,7 +1,7 @@
 
 - name: Download Java
   hosts: portal-main
-  become:yes
+  become: yes
   gather_facts: no
   roles:
     - jdk
