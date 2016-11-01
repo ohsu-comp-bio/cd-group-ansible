@@ -8,5 +8,5 @@
 
 - name: Unarchive the dist
   unarchive: src=/mnt/dist/kafka-manager-1.3.1.6.tar.gz
-             dest=/mnt/dist/kafka-manager
+             dest=/mnt/dist
              copy=no
