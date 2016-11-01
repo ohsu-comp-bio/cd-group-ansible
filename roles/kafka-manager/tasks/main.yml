@@ -17,4 +17,4 @@
         state=link
 
 - name: Make bin 
-  command ./sbt clean dist chdir=/mnt/dist/kafka-manager
+  command: ./sbt clean dist chdir=/mnt/dist/kafka-manager
