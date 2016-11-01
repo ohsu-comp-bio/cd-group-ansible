@@ -1,0 +1,8 @@
+
+- name: Check Java existence and version
+  command:  java -version
+  register: java_result
+  ignore_errors: yes
+
+- include: install.yml
+  when: java_result.rc != 0 or ("{{ jdk_version }}" not in java_result.stderr)
