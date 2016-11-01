@@ -45,3 +45,8 @@
   file: src=/mnt/dist/kafka-manager-1.3.1.6
         dest=/mnt/dist/kafka-manager
         state=link
+
+- name: edit Kafka conf file
+  lineinfile: dest="/mnt/dist/kafka-manager/conf/application.conf"
+              regexp="^kafka-manager.zkhosts"
+              line='kafka-manager.zkhosts="10.96.11.92:2181"'
