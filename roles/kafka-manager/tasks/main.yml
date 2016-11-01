@@ -19,7 +19,9 @@
              copy=no
 
 - name: Rename dist file
-  command: mv kafka-manager-1.3.1.6 kafka-manager-tar chdir=/mnt/dist
+  command: mv kafka-manager-1.3.1.6 kafka-manager-tar 
+           chdir=/mnt/dist
+           creates=./kafka-manager-tar
 
 - name: Make bin
   command: ./sbt clean dist 
