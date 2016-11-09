@@ -16,22 +16,22 @@
         mode=0600
 
 - name: Download main portal repos
-  become_user: ubuntu
+  become: yes
   git: repo=ubuntu@10.60.60.103:/mnt/git/portal_html.git
        dest=/mnt/git/portal_html
-       key_file=~/.ssh/cdgroup.pem
+       key_file=/home/ubuntu/.ssh/cdgroup.pem
        accept_hostkey=yes
 
 - name: Download wiki portal repos
-  become_user: ubuntu
+  become: yes
   git: repo=ubuntu@10.60.60.103:/mnt/git/wikidata.git
        dest=/mnt/git/wikidata
-       key_file=~/.ssh/cdgroup.pem
+       key_file=/home/ubuntu/.ssh/cdgroup.pem
        accept_hostkey=yes
 
 - name: Download kafka portal repos
-  become_user: ubuntu
+  become: yes
   git: repo=ubuntu@10.60.60.103:/mnt/git/kafka-simple-monitor.git
        dest=/mnt/git/kafka-simple-monitor
-       key_file=~/.ssh/cdgroup.pem
+       key_file=/home/ubuntu/.ssh/cdgroup.pem
        accept_hostkey=yes
