@@ -23,7 +23,7 @@
        accept_hostkey=yes
 
 - name: Set ownership to ubuntu
-  file: path=/mnt/git/portal-html
+  file: path=/mnt/git/portal_html
         owner=ubuntu
         group=ubuntu
         recurse=yes
