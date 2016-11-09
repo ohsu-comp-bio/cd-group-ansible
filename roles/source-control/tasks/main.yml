@@ -8,7 +8,7 @@
     - git
 
 - name: Need SSH key
-  become: yes
+  become_user: ubuntu
   copy: src=~/.ssh/cdgroup.pem 
         dest=~/.ssh/cdgroup.pem
         owner=ubuntu
