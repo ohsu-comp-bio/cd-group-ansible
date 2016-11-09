@@ -22,6 +22,12 @@
        key_file=/home/ubuntu/.ssh/cdgroup.pem
        accept_hostkey=yes
 
+- name: Set ownership to ubuntu
+  file: path=/mnt/git/portal-html
+        owner=ubuntu
+        group=ubuntu
+        recurse=yes
+
 - name: Download wiki portal repos
   become: yes
   git: repo=ubuntu@10.60.60.103:/mnt/git/wikidata.git
@@ -29,9 +35,21 @@
        key_file=/home/ubuntu/.ssh/cdgroup.pem
        accept_hostkey=yes
 
+- name: Set ownership to ubuntu
+  file: path=/mnt/git/wikidata
+        owner=ubuntu
+        group=ubuntu
+        recurse=yes
+
 - name: Download kafka portal repos
   become: yes
   git: repo=ubuntu@10.60.60.103:/mnt/git/kafka-simple-monitor.git
        dest=/mnt/git/kafka-simple-monitor
        key_file=/home/ubuntu/.ssh/cdgroup.pem
        accept_hostkey=yes
+
+- name: Set ownership to ubuntu
+  file: path=/mnt/git/kafka-simple-monitor
+        owner=ubuntu
+        group=ubuntu
+        recurse=yes
