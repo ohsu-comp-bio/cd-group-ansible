@@ -1,0 +1,29 @@
+
+- name: Download Java
+  hosts: portal-main
+  become: yes
+  gather_facts: no
+  roles:
+    - jdk
+
+- name: Download repos
+  hosts: portal-main
+  become: yes
+  gather_facts: no
+  roles:
+    - source-control
+    - kafka-manager
+
+- name: Configure kafka-monitor
+  hosts: portal-main
+  become: yes
+  gather_facts: no
+  roles:
+    - kafka-monitor
+
+- name: Provision nginx
+  hosts: portal-main
+  become: yes
+  gather_facts: no
+  roles:
+    - nginx

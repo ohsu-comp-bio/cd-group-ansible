@@ -1,0 +1,55 @@
+
+- name: Install git
+  become: yes
+  apt: pkg={{ item }}
+       state=installed
+       update_cache=yes
+  with_items:
+    - git
+
+- name: Need SSH key
+  become_user: ubuntu
+  copy: src=~/.ssh/cdgroup.pem 
+        dest=~/.ssh/cdgroup.pem
+        owner=ubuntu
+        group=ubuntu
+        mode=0600
+
+- name: Download main portal repos
+  become: yes
+  git: repo=ubuntu@10.60.60.103:/mnt/git/portal_html.git
+       dest=/mnt/git/portal_html
+       key_file=/home/ubuntu/.ssh/cdgroup.pem
+       accept_hostkey=yes
+
+- name: Set ownership to ubuntu
+  file: path=/mnt/git/portal_html
+        owner=ubuntu
+        group=ubuntu
+        recurse=yes
+
+- name: Download wiki portal repos
+  become: yes
+  git: repo=ubuntu@10.60.60.103:/mnt/git/wikidata.git
+       dest=/mnt/git/wikidata
+       key_file=/home/ubuntu/.ssh/cdgroup.pem
+       accept_hostkey=yes
+
+- name: Set ownership to ubuntu
+  file: path=/mnt/git/wikidata
+        owner=ubuntu
+        group=ubuntu
+        recurse=yes
+
+- name: Download kafka portal repos
+  become: yes
+  git: repo=ubuntu@10.60.60.103:/mnt/git/kafka-simple-monitor.git
+       dest=/mnt/git/kafka-simple-monitor
+       key_file=/home/ubuntu/.ssh/cdgroup.pem
+       accept_hostkey=yes
+
+- name: Set ownership to ubuntu
+  file: path=/mnt/git/kafka-simple-monitor
+        owner=ubuntu
+        group=ubuntu
+        recurse=yes
