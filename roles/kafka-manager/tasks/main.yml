@@ -26,9 +26,10 @@
 - name: Alter Kafka-manager routes
   template: src="routes.conf"
             dest="/mnt/dist/kafka-manager-tar/conf/routes"
-
+# we probbly want to have a local maven-ivy repository, because downloading all the 
+# JARs for this build takes more than 2 minutes.
 - name: Make bin
-  command: ./sbt clean dist 
+  command: ./sbt dist 
            chdir=/mnt/dist/kafka-manager-tar
            creates=./target/universal/kafka-manager-1.3.1.6.zip
 
