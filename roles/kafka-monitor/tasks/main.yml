@@ -30,6 +30,7 @@
 #       virtualenv_python=python2.7
 
 - name: Configure waf
+  become_user: ubuntu
   command: ./waf configure chdir=/mnt/git/kafka-simple-monitor/
 
 - name: Build waf

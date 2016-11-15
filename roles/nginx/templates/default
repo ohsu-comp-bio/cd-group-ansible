@@ -1,0 +1,36 @@
+server {
+    listen       80;
+    server_name  localhost;
+
+    location / {
+        root   /mnt/git/portal_html;
+        index  index.html index.htm;
+    }
+
+    location /wiki {
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $host;
+        proxy_redirect off;
+        proxy_pass http://10.60.60.42:8080;
+    }
+
+    location /kafka-manager {
+        proxy_pass http://localhost:9000/kafka-manager;
+        proxy_connect_timeout   2;
+        proxy_redirect off;
+        proxy_buffering off;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+
+    location /kafka-monitor {
+        uwsgi_pass      127.0.0.1:5000;
+        uwsgi_param     SCRIPT_NAME /kafka-monitor;
+        include uwsgi_params;
+    }
+
+    location /dcc-es/ {
+        proxy_pass http://10.60.60.161:9200/;
+    }
+}
