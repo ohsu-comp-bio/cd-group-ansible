@@ -26,11 +26,11 @@
        floating_ips: [10.96.11.127]
        volumes:
        - "{{ volume_name }}" 
-  - name: create authentication instance (LDAP server)
+  - name: create single-node kafka cluster
     os_server:
        state: present
-       name: auth 
+       name: kafka-test
        image: "Ubuntu 14.04"
        key_name: "{{ os_key }}"
-       flavor: m1.small
+       flavor: m1.xlarge
        network: "{{ os_network }}"

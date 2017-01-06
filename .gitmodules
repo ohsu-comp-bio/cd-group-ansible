@@ -1,0 +1,3 @@
+[submodule "roles/AnsibleShipyard.ansible-zookeeper"]
+	path = roles/AnsibleShipyard.ansible-zookeeper
+	url = https://github.com/AnsibleShipyard/ansible-zookeeper.git
