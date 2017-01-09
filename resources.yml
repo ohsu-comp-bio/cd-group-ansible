@@ -29,7 +29,7 @@
   - name: create single-node kafka cluster
     os_server:
        state: present
-       name: kafka-test
+       name: kafka
        image: "Ubuntu 14.04"
        key_name: "{{ os_key }}"
        flavor: m1.xlarge
