@@ -23,7 +23,7 @@
        key_name: "{{ os_key }}"
        flavor: m1.small
        network: "{{ os_network }}"
-       floating_ips: [10.96.11.127]
+       floating_ips: ["{{ source_control_ip }}"]
        volumes:
        - "{{ volume_name }}" 
   - name: create single-node kafka cluster
@@ -34,3 +34,4 @@
        key_name: "{{ os_key }}"
        flavor: m1.xlarge
        network: "{{ os_network }}"
+       floating_ips: ["{{ kafka_ip }}"] # port open for kafka
