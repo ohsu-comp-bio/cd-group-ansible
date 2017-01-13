@@ -1,0 +1,32 @@
+# Copyright 2016(c) The Ontario Institute for Cancer Research. All rights reserved.
+
+- name: Clean copy
+  file: 
+    path: "{{ install_dir }}"
+    state: absent
+
+- name: Ensure directories
+  file: path={{ item }} state=directory
+  with_items:
+    - "{{ install_dir }}"
+
+- name: Download the distribution
+  get_url:  url="{{ spark_artifactory }}"
+            dest="{{ install_dir }}/"
+            mode=0444
+
+- name: Extract the dist
+  unarchive:  
+    src: "{{ install_dir }}/{{ spark_archive }}"
+    dest: "{{ install_dir }}"
+    copy: no
+
+- name: add hostname to /etc/hosts
+  # needed for host IP resolution, because DNS is not installed in exastack
+  replace:
+    dest: /etc/hosts
+    regexp: '127\.0\.0\.1 localhost$'
+    replace: '127.0.0.1 localhost {{ ansible_hostname }}'
+
+- { include: master.yml, when: master }
+- { include: worker.yml, when: not master }

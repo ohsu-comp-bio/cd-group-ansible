@@ -1,0 +1,22 @@
+# Copyright 2016(c) The Ontario Institute for Cancer Research. All rights reserved.
+
+
+# Spark - Master
+- hosts: dcc-etl-2
+  remote_user: ubuntu
+  become: yes
+  vars_files:
+    - "vars/main.yml"
+  roles:
+    # - jdk already installed
+    - { role: spark, master: True }
+
+# Spark - Slave
+- hosts: dcc-spark-worker-1, dcc-spark-worker-2
+  remote_user: ubuntu
+  become: yes
+  vars_files:
+    - "vars/main.yml"
+  roles:
+    - jdk
+    - { role: spark, master: False}
