@@ -35,3 +35,14 @@
        flavor: m1.xlarge
        network: "{{ os_network }}"
        floating_ips: ["{{ kafka_ip }}"] # port open for kafka
+  - name: create spark workers
+    os_server:
+       state: present
+       name: "{{ item }}"
+       image: "Ubuntu 14.04"
+       key_name: "{{ os_key }}"
+       flavor: m1.xlarge
+       network: "{{ os_network }}"
+    with_items:
+      - dcc-spark-worker-1
+      - dcc-spark-worker-2
