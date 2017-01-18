@@ -21,12 +21,16 @@
     dest: "{{ install_dir }}"
     copy: no
 
+- name: configure the logger
+  template:
+    src: log4j.properties.j2
+    dest: "{{ spark_conf_dir }}/log4j.properties"
+
 - name: add hostname to /etc/hosts
   # needed for host IP resolution, because DNS is not installed in exastack
-  replace:
+  lineinfile:
     dest: /etc/hosts
-    regexp: '127\.0\.0\.1 localhost$'
-    replace: '127.0.0.1 localhost {{ ansible_hostname }}'
+    line: '{{ ansible_default_ipv4.address }} {{ ansible_hostname }}'
 
 - { include: master.yml, when: master }
 - { include: worker.yml, when: not master }

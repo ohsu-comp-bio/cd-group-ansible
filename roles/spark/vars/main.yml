@@ -4,7 +4,7 @@ install_dir: /srv
 spark_name: spark-1.6.1-bin-2.5.0-mr1-cdh5.3.1
 spark_archive: "{{ spark_name }}.tgz"
 spark_archive_output: spark-1.6.1-bin-spark-1.6.1-bin-2.5.0-mr1-cdh5.3.1
-spark_conf_dir: /srv/{{ spark_name }}/conf
+spark_conf_dir: /srv/{{ spark_archive_output }}/conf
 spark_artifactory: https://artifacts.oicr.on.ca/artifactory/dcc-dependencies/spark/{{ spark_archive }}
 spark_master: 10.60.60.55
 
