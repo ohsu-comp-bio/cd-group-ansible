@@ -47,6 +47,3 @@
 - name: Enable and start the Hadoop HDFS NameNode service
   service: name=hadoop-hdfs-namenode enabled=yes state=started
 
-- name: set namenode IP address for use in datanode role
-  set_fact:
-    hdfs_namenode_host: "{{ ansible_default_ipv4.address }}"
