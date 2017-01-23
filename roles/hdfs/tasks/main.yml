@@ -14,7 +14,8 @@
   # needed for host IP resolution, because DNS is not installed in exastack
   lineinfile:
     dest: /etc/hosts
-    line: '{{ ansible_default_ipv4.address }} {{ ansible_hostname }}'
+    line: "{{ hostvars[lookup('inventory_hostnames', item )].openstack.private_v4 }} {{ item }}"
+  with_items: [dcc-hdfs-namenode, dcc-hdfs-datanode]
 
 - { include: namenode.yml, when: hdfs_namenode }
 - { include: datanode.yml, when: not hdfs_namenode }
