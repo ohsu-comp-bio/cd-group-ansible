@@ -15,7 +15,7 @@
   lineinfile:
     dest: /etc/hosts
     line: "{{ hostvars[lookup('inventory_hostnames', item )].openstack.private_v4 }} {{ item }}"
-  with_items: [dcc-hdfs-namenode, dcc-hdfs-datanode]
+  with_items: [dcc-hdfs-namenode, dcc-hdfs-datanode-1, dcc-hdfs-datanode-2] # this list duplicates the host list in the top level, so should be in a variable.
 
 - { include: namenode.yml, when: hdfs_namenode }
 - { include: datanode.yml, when: not hdfs_namenode }
