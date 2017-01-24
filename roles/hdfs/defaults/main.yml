@@ -14,6 +14,9 @@ hdfs_disks: [{ mount_point: '/dfs/data', device: '/dev/sda1' }]
 hdfs_core_properties:
   - { name: "fs.defaultFS", value: "hdfs://{{ hdfs_namenode_host }}:{{ hdfs_namenode_port }}" }
 hdfs_namenode_properties:
+  # need to add user submitting job to the "hadoop" group, or turn filesystem
+  # security off.
+  # https://hadoop.apache.org/docs/r1.2.1/hdfs_permissions_guide.html#Configuration+Parameters
   - { name: "dfs.permissions.superusergroup", value: "hadoop" }
   - { name: "dfs.namenode.name.dir", value: "/media/persistent0" }
 hdfs_datanode_properties:
