@@ -15,7 +15,7 @@
        key_name: "{{ os_key }}"
        flavor: m1.xlarge
        network: "{{ os_network }}"
-  - name: create source control instance
+    - name: create source control instance
     os_server:
        state: present
        name: source-control
@@ -26,7 +26,7 @@
        floating_ips: ["{{ source_control_ip }}"]
        volumes:
        - "{{ volume_name }}" 
-  - name: create single-node kafka cluster
+    - name: create single-node kafka cluster
     os_server:
        state: present
        name: kafka
@@ -41,9 +41,9 @@
        name: "dcc-spark-worker-{{ item }}"
        image: "Ubuntu 14.04"
        key_name: "{{ os_key }}"
-       flavor: m1.xlarge
+       flavor: acc.quarter
        network: "{{ os_network }}"
-    with_items: [1, 2, 3, 4]
+    with_items: [1, 2, 3, 4, 5, 6]
   - name: create HDFS nodes
     os_server:
        state: present

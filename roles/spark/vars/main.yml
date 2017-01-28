@@ -5,7 +5,8 @@ spark_name: spark-1.6.1-bin-2.5.0-mr1-cdh5.3.1
 spark_archive: "{{ spark_name }}.tgz"
 spark_archive_output: spark-1.6.1-bin-spark-1.6.1-bin-2.5.0-mr1-cdh5.3.1
 spark_conf_dir: /srv/{{ spark_archive_output }}/conf
+spark_lib_dir: /srv/{{ spark_archive_output }}/lib
 spark_artifactory: https://artifacts.oicr.on.ca/artifactory/dcc-dependencies/spark/{{ spark_archive }}
 spark_master: 10.60.60.55
 
-spark_workers: ["10.60.60.200", "10.60.60.201", "10.60.60.210", "10.60.60.211"]
+spark_workers: [dcc-spark-worker-1, dcc-spark-worker-2, dcc-spark-worker-3, dcc-spark-worker-4, dcc-spark-worker-5, dcc-spark-worker-6]

@@ -8,11 +8,11 @@
   vars_files:
     - "vars/main.yml"
   roles:
-    # - jdk already installed
+    - jdk
     - { role: spark, master: True }
 
 # Spark - Slave
-- hosts: dcc-spark-worker-1, dcc-spark-worker-2, dcc-spark-worker-3, dcc-spark-worker-4
+- hosts: dcc-spark-worker-1, dcc-spark-worker-2, dcc-spark-worker-3, dcc-spark-worker-4, dcc-spark-worker-5, dcc-spark-worker-6
   remote_user: ubuntu
   become: yes
   vars_files:
