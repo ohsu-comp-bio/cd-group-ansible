@@ -1,3 +1,7 @@
+# kafka will need a certificate for TLS
+# keytool -keystore roles/kafka-security/files/kafka.keystore.jks -alias
+# localhost -validity 365 -genkey
+
 ---
 - hosts: kafka 
   remote_user: ubuntu

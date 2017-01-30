@@ -1,11 +1,5 @@
 # Copyright 2016(c) The Ontario Institute for Cancer Research. All rights reserved.
 
-- name: Install ACL
-  apt: pkg={{ item }}
-       state=present
-  with_items:
-    - acl
-
 - name: Install Hadoop DataNode and client
   apt: pkg={{ item }}
        state=present
@@ -18,6 +12,7 @@
     dest: /etc/default/bigtop-utils
     regexp: ^export JAVA_HOME
     line: export JAVA_HOME={{ jdk_home }}
+
 
 - name: Configure Hadoop HDFS DataNode
   template: src={{ item }}.xml.j2 dest={{ hdfs_conf_dir }}/{{ item | replace("datanode-", "") }}.xml

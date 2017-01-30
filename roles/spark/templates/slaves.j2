@@ -1,4 +1,4 @@
 # Copyright 2016(c) The Ontario Institute for Cancer Research. All rights reserved.
-{% for host in spark_workers %}
-{{ host }}
+{% for i in range(10) %}
+dcc-spark-worker-{{ i+1 }}
 {% endfor %}

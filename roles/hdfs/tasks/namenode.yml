@@ -1,11 +1,5 @@
 # Copyright 2016(c) The Ontario Institute for Cancer Research. All rights reserved.
 
-- name: Install ACL
-  apt: pkg={{ item }}
-       state=present
-  with_items:
-    - acl
-
 - name: Install Hadoop HDFS NameNode
   apt: pkg=hadoop-hdfs-namenode
        state=present
@@ -15,6 +9,7 @@
     dest: /etc/default/bigtop-utils
     regexp: ^export JAVA_HOME
     line: export JAVA_HOME={{ jdk_home }}
+
 
 - name: Preconfigure Hadoop
   template: src=hadoop-env.sh.j2 dest={{ hdfs_conf_dir }}/hadoop-env.sh

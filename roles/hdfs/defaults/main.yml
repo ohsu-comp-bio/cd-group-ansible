@@ -2,6 +2,7 @@
 
 hdfs_cloudera_distribution: "cdh5.3.1"
 hdfs_conf_dir: "/etc/hadoop/conf"
+hdfs_lib_dir: "/usr/lib/hadoop/lib"
 hdfs_namenode: False
 # get the private ipv4 address from the dynamic inventory.  Can also use
 # hostvars[lookup('inventory_hostnames', 'dcc-hdfs-namenode')].openstack.private_v4

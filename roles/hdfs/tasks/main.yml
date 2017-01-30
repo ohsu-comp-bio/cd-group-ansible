@@ -10,6 +10,9 @@
 
 - apt: update_cache=yes
 
+- name: install native compression
+  apt: name=liblzo2-dev
+
 - name: add hostname to /etc/hosts
   # needed for host IP resolution, because DNS is not installed in exastack
   lineinfile:

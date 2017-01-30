@@ -1,7 +1,20 @@
+
+- name: install Python lxml so we can install HDFS compression library
+  apt:
+    name: python-lxml
+
+- name: install HDFS compression library
+  maven_artifact:
+    repository_url: 'http://maven.twttr.com/'
+    group_id: com.hadoop.gplcompression
+    artifact_id: hadoop-lzo
+    version: 0.4.20
+    dest: "{{ hdfs_lib_dir }}/hadoop-lzo.jar"
+
 - name: Configure Spark Worker 
   template: src=spark-defaults.conf.j2 dest=/srv/{{ spark_archive_output }}/conf/spark-defaults.conf
 
 - name: Configure Spark Worker
   template: src=spark-env.sh.j2 dest=/srv/{{ spark_archive_output }}/conf/spark-env.sh mode="u=rwx,g=r,o=r"
-  notify:
-    - Start Spark Slave
+  #  notify:
+  #  - Start Spark Slave
