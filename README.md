@@ -1,18 +1,6 @@
 # cd-group-ansible
-configuration for CD Group infrastructure.
+This repository has configuration files for the CD Group project.  This
+includes a developer portal, and Spark and HDFS clusters for ETL.
 
-# To run the main cd-group portal VM
-
-ansible-playbook -i config/hosts portal-main.yml
-
-ssh portal-main
-
-cd /mnt/git/kafka-simple-monitor/build/app/
-
-sudo uwsgi --ini kafka_mon.ini &
-
-cd /mnt/dist/kafka-manager/
-
-sudo bin/kafka-manager -Dapplication.home=$(pwd) -Dconfig.file=./conf/application.conf &
-
-close terminal
+resources.yml creates OpenStack instances.  site.yml configures software and
+services on those instances.
