@@ -4,3 +4,9 @@
 [submodule "roles/ansible-kafka"]
 	path = roles/ansible-kafka
 	url = https://github.com/jaytaylor/ansible-kafka.git
+[submodule "roles/kibana"]
+	path = roles/kibana
+	url = https://github.com/ohsu-computational-biology/ansible-role-kibana.git
+[submodule "roles/elasticsearch"]
+	path = roles/elasticsearch
+	url = https://github.com/elastic/ansible-elasticsearch.git

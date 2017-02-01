@@ -1,0 +1,5 @@
+
+- name: setup a dev environment
+  hosts: localhost
+  roles:
+    - vim

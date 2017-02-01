@@ -1,0 +1,17 @@
+- name: Add rsyslog repository
+  become: yes
+  apt_repository: repo='ppa:adiscon/v8-stable'
+
+- name: Install rsyslog-elasticsearch
+  become: yes
+  apt: name=rsyslog-elasticsearch
+
+- name:
+  become: yes
+  apt: name=rsyslog-mmnormalize
+
+- name: configure log message forwarding to elasticsearch
+  template: src=60-elasticsearch.conf dest=/etc/rsyslog.d/60-elasticsearch.conf
+
+- name: reload rsyslog config
+  service: name=rsyslog state=restarted

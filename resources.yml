@@ -1,9 +1,11 @@
 # Create CD-Group infrastructure instances and disks
-# set OpenStack auth environment variables using RC file: 
+# set OpenStack auth environment variables using RC file:
 # http://docs.openstack.org/cli-reference/common/cli-set-environment-variables-using-openstack-rc.html
 - name: launch a compute instances for CD Group infrastructure
   hosts: localhost
   gather_facts: false # don't gather facts on local host
+  vars_files:
+  - "vars/main.yml"
   vars:
     volume_name: "source control"
   tasks:
@@ -12,6 +14,14 @@
        state: present
        name: portal-main
        image: "Ubuntu 14.04" # choose an image that has python installed
+       key_name: "{{ os_key }}"
+       flavor: m1.xlarge
+       network: "{{ os_network }}"
+  - name: create monitor
+    os_server:
+       state: present
+       name: monitor
+       image: "Ubuntu 14.04"
        key_name: "{{ os_key }}"
        flavor: m1.xlarge
        network: "{{ os_network }}"

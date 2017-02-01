@@ -1,2 +1,5 @@
+- include: dev-services.yml
+- include: infrastructure.yml
 - include: portal-main.yml
+- include: dcc-portal.yml
 - include: etl.yml
