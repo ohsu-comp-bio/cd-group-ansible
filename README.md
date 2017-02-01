@@ -10,16 +10,17 @@ site servers could be configured on non-OpenStack machines as well.
 Copy vars/main.yml.example to vars/main.yml and set the variables for your
 environment.  To setup all machines and services, run
 
+```
    ansible-playbook resources.yml
    ansible-playbook site.yml
-
+```
 site.yml includes several playbooks, such as etl.yml, which can be run
 independently.
-
+```
    ansible-playbook etl.yml
-
+```
 Some key locations for the installed services are
-
+```
    HDFS:
    /usr/lib/hadoop-hdfs
    /etc/hadoop/
@@ -29,3 +30,4 @@ Some key locations for the installed services are
 
    DCC ETL
    /mnt/etl/dcc-release
+```
