@@ -3,7 +3,7 @@
 #
 # https://spark.apache.org/docs/latest/configuration.html
 
-spark.executor.extraClassPath   {{ spark_lib_dir }}/hadoop-lzo.jar 
+spark.executor.extraClassPath   {{ spark_lib_dir }}/hadoop-lzo.jar
 spark.executor.extraLibraryPath /opt/cloudera/parcels/CDH/lib/hadoop/lib/native:/opt/cloudera/parcels/GPLEXTRAS/lib/hadoop/lib/native
 spark.driver.extraLibraryPath   /opt/cloudera/parcels/CDH/lib/hadoop/lib/native:/opt/cloudera/parcels/GPLEXTRAS/lib/hadoop/lib/native
 
@@ -14,4 +14,4 @@ spark.eventLog.dir               /tmp/spark/eventlog
 # spark.executor.heartbeatInterval default 10s
 spark.executor.heartbeatInterval 20s
 # spark.network.timeout default 120s
-spark.network.timeout 240s
+spark.network.timeout 1800s

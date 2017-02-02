@@ -13,6 +13,10 @@
 - name: install native compression
   apt: name=liblzo2-dev
 
+# TODO: install hadoop native libs
+# hadoop-2.7.3/lib/native/libhdfs.so
+# hadoop-2.7.3/lib/native/libhadoop.so
+
 - name: add hostname to /etc/hosts
   # needed for host IP resolution, because DNS is not installed in exastack
   lineinfile:

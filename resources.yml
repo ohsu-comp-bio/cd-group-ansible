@@ -61,15 +61,26 @@
       line: "{{ hostvars[lookup('inventory_hostnames', 'dcc-spark-worker-' + item )].openstack.private_v4 }} {{ 'dcc-spark-worker-' + item }}"
     become: True
     with_items: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
+  - name: create HDFS name node
+    os_server:
+       state: present
+       name: dcc-hdfs-namenode
+       image: "Ubuntu 14.04"
+       key_name: "{{ os_key }}"
+       # https://wiki.apache.org/hadoop/FAQ#What_kind_of_hardware_scales_best_for_Hadoop.3F
+       # "dual processor/dual core machines with 4-8GB of RAM"
+       # https://wiki.apache.org/hadoop/MachineScaling
+       flavor: m1.large
+       network: "{{ os_network }}"
   - name: create HDFS nodes
     os_server:
        state: present
-       name: "{{ item }}"
+       name: "dcc-hdfs-datanode-{{ item }}"
        image: "Ubuntu 14.04"
        key_name: "{{ os_key }}"
-       flavor: m1.xlarge
+       # https://wiki.apache.org/hadoop/FAQ#What_kind_of_hardware_scales_best_for_Hadoop.3F
+       # "dual processor/dual core machines with 4-8GB of RAM"
+       # https://wiki.apache.org/hadoop/MachineScaling
+       flavor: m1.large
        network: "{{ os_network }}"
-    with_items:
-      - dcc-hdfs-namenode
-      - dcc-hdfs-datanode-1
-      - dcc-hdfs-datanode-2
+    with_items: ['1', '2', '3', '4']]
