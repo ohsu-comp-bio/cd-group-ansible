@@ -7,13 +7,13 @@
     - "vars/main.yml"
   roles:
     - jdk
-    - { role: elasticsearch, 
+    - { role: elasticsearch,
         es_major_version: "5.x",
         es_version: "5.2.0",
         es_instance_name: "{{ ansible_hostname }}", es_data_dirs:
-      "/opt/elasticsearch/data", es_log_dir: "/opt/elasticsearch/logs", es_work_dir: "/opt/elasticsearch/temp", 
+      "/opt/elasticsearch/data", es_log_dir: "/opt/elasticsearch/logs", es_work_dir: "/opt/elasticsearch/temp",
       es_config: {
-          node.name: "{{ ansible_hostname }}", 
+          node.name: "{{ ansible_hostname }}",
           cluster.name: "monitor-es"
         }
       }
@@ -27,12 +27,12 @@
   tasks:
   - name: install plugin
     command: /usr/share/elasticsearch/bin/plugin --install mobz/elasticsearch-head/1.x
-    ignore_errors: true # this task fails if the plugin is already installed, so we ignore errors for repeatability 
+    ignore_errors: true # this task fails if the plugin is already installed, so we ignore errors for repeatability
 
 # kafka will need a certificate for TLS
 # keytool -keystore roles/kafka-security/files/kafka.keystore.jks -alias
 # localhost -validity 365 -genkey
-- hosts: kafka 
+- hosts: kafka
   remote_user: ubuntu
   become: yes
   roles:
@@ -40,7 +40,7 @@
     - role: AnsibleShipyard.ansible-zookeeper
       zookeeper_hosts:
         - host: kafka
-          id: 1 
+          id: 1
     - role: ansible-kafka
       kafka_hosts: [kafka]
       kafka_zookeeper_hosts: [kafka]
