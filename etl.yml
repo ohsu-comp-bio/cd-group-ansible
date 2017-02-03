@@ -20,6 +20,7 @@
   roles:
     - jdk
     - { role: spark, master: False}
+    - { role: hdfs, hdfs_namenode: False}
 
 # HDFS
 - hosts: dcc-hdfs-namenode
@@ -30,10 +31,3 @@
   roles:
     - { role: hdfs, hdfs_namenode: True}
 
-- hosts: dcc-hdfs-datanode-1, dcc-hdfs-datanode-2
-  remote_user: ubuntu
-  become: yes
-  vars_files:
-    - "vars/main.yml"
-  roles:
-    - { role: hdfs, hdfs_namenode: False}

@@ -22,12 +22,19 @@ independently.
 Some key locations for the installed services are
 ```
    HDFS:
-   /usr/lib/hadoop-hdfs
+   /usr/lib/hadoop-hdfs/
    /etc/hadoop/
+   /var/log/hadoop-hdfs/
 
    Spark:
    /srv/spark-1.6.1-bin-spark-1.6.1-bin-2.5.0-mr1-cdh5.3.1/
 
    DCC ETL
-   /mnt/etl/dcc-release
+   /mnt/etl/dcc-release/
+
+   kibana
+   /etc/kibana/kibana.yml
+
+   elasticsearch
+   /etc/elasticsearch/{instance name}/elasticsearch.yml
 ```

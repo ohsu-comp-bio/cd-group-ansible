@@ -13,17 +13,26 @@
 - name: install native compression
   apt: name=liblzo2-dev
 
-# TODO: install hadoop native libs
-# hadoop-2.7.3/lib/native/libhdfs.so
-# hadoop-2.7.3/lib/native/libhadoop.so
-
 - name: add hostname to /etc/hosts
   # needed for host IP resolution, because DNS is not installed in exastack
+  # TODO: get host info from group variable.  See
+  # http://docs.ansible.com/ansible/playbooks_variables.html#magic-variables-and-how-to-access-information-about-other-hosts
   lineinfile:
     dest: /etc/hosts
     line: "{{ hostvars[lookup('inventory_hostnames', item )].openstack.private_v4 }} {{ item }}"
-  with_items: [dcc-hdfs-namenode, dcc-hdfs-datanode-1, dcc-hdfs-datanode-2] # this list duplicates the host list in the top level, so should be in a variable.
+  with_items: # this list duplicates the host list in the top level, so should be in a variable.
+    - dcc-hdfs-namenode
+    - dcc-spark-worker-1
+    - dcc-spark-worker-2
+    - dcc-spark-worker-3
+    - dcc-spark-worker-4
+    - dcc-spark-worker-5
+    - dcc-spark-worker-6
+    - dcc-spark-worker-7
+    - dcc-spark-worker-8
+    - dcc-spark-worker-9
+    - dcc-spark-worker-10
 
-- { include: namenode.yml, when: hdfs_namenode }
 - { include: datanode.yml, when: not hdfs_namenode }
+- { include: namenode.yml, when: hdfs_namenode }
 
