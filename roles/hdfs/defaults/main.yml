@@ -8,7 +8,7 @@ hdfs_namenode: False
 # hostvars[lookup('inventory_hostnames', 'dcc-hdfs-namenode')].openstack.private_v4
 # hostvars[lookup('inventory_hostnames', 'dcc-hdfs-namenode')].ansible_all_ipv4_addresses[0]
 #
-hdfs_namenode_host: "dcc-hdfs-namenode"
+hdfs_namenode_host: "dcc-etl-2"
 hdfs_namenode_port: 8020
 hdfs_disks: [{ mount_point: '/dfs/data', device: '/dev/sda1' }]
 

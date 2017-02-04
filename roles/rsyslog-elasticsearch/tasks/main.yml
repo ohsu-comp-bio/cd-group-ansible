@@ -11,7 +11,7 @@
   apt: name=rsyslog-mmnormalize
 
 - name: configure log message forwarding to elasticsearch
-  template: src=60-elasticsearch.conf dest=/etc/rsyslog.d/60-elasticsearch.conf
+  template: src=60-elasticsearch.conf.j2 dest=/etc/rsyslog.d/60-elasticsearch.conf
 
 - name: reload rsyslog config
   service: name=rsyslog state=restarted

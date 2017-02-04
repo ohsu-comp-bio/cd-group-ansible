@@ -19,9 +19,10 @@
   # http://docs.ansible.com/ansible/playbooks_variables.html#magic-variables-and-how-to-access-information-about-other-hosts
   lineinfile:
     dest: /etc/hosts
+    regexp: "{{ item }}"
     line: "{{ hostvars[lookup('inventory_hostnames', item )].openstack.private_v4 }} {{ item }}"
   with_items: # this list duplicates the host list in the top level, so should be in a variable.
-    - dcc-hdfs-namenode
+    - dcc-etl-2
     - dcc-spark-worker-1
     - dcc-spark-worker-2
     - dcc-spark-worker-3

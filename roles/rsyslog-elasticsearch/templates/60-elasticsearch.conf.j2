@@ -1,6 +1,6 @@
 module(load="omelasticsearch")
-*.* action(type="omelasticsearch"
-       server="localhost"
+daemon,user.* action(type="omelasticsearch"
+       server="{{ monitor_host }}"
        serverport="9200"
        searchIndex="rsyslog-index"
        searchType="rsyslog-type"

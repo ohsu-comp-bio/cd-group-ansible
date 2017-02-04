@@ -1,7 +1,7 @@
 # Copyright 2016(c) The Ontario Institute for Cancer Research. All rights reserved.
 
 
-# Spark - Master
+# Spark master and HDFS namenode
 - hosts: dcc-etl-2
   remote_user: ubuntu
   become: yes
@@ -10,8 +10,10 @@
   roles:
     - jdk
     - { role: spark, master: True }
+    - { role: hdfs, hdfs_namenode: True}
+    - rsyslog-elasticsearch
 
-# Spark workers
+# Spark workers and HDFS data nodes
 - hosts: dcc_spark_workers
   remote_user: ubuntu
   become: yes
@@ -21,13 +23,4 @@
     - jdk
     - { role: spark, master: False}
     - { role: hdfs, hdfs_namenode: False}
-
-# HDFS
-- hosts: dcc-hdfs-namenode
-  remote_user: ubuntu
-  become: yes
-  vars_files:
-    - "vars/main.yml"
-  roles:
-    - { role: hdfs, hdfs_namenode: True}
 

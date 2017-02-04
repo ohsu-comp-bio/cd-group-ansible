@@ -17,6 +17,15 @@
        key_name: "{{ os_key }}"
        flavor: m1.xlarge
        network: "{{ os_network }}"
+  - name: create DCC portal Elasticsearch cluster
+    os_server:
+       state: present
+       name: "dcc-es-{{ item }}"
+       image: "Ubuntu 14.04" # choose an image that has python installed
+       key_name: "{{ os_key }}"
+       flavor: acc.half
+       network: "{{ os_network }}"
+    with_items: ["1", "2", "3"]
   - name: create monitor
     os_server:
        state: present

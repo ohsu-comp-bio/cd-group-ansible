@@ -25,7 +25,7 @@
         kibana_elasticsearch_url: "http://{{ ansible_default_ipv4.address }}:9200", # e.g. "http://tempuri.org:9200"
         kibana_server_host: "{{ ansible_default_ipv4.address }}"
       }
-    - rsyslog-elasticsearch
+    - { role: rsyslog-elasticsearch, monitor_host: "{{ ansible_default_ipv4.address }}" }
   vars:
     es_java_install: false
   tasks:
