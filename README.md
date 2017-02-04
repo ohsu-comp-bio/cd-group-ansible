@@ -43,7 +43,6 @@ Elasticsearch Cluster
 names: dcc-es-1 through dcc-es-4
 Ubuntu 14.04
 acc.half
-10.50.50.42 & 10.50.50.44-46
 4 64GB RAM machines
 https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-configuration.html
 
