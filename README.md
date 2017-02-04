@@ -35,6 +35,47 @@ Some key locations for the installed services are
    kibana
    /etc/kibana/kibana.yml
 
-   elasticsearch
-   /etc/elasticsearch/{instance name}/elasticsearch.yml
+```
+DCC uses an old version of Elasticsearch that is not supported by the role
+available in ansible galaxy.  Currently node setup is done manually:
+```
+Elasticsearch Cluster
+names: dcc-es-1 through dcc-es-4
+Ubuntu 14.04
+acc.half
+10.50.50.42 & 10.50.50.44-46
+4 64GB RAM machines
+https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-configuration.html
+
+Starting ES Node
+Associate temporary floating IP address to vm
+sudo add-apt-repository ppa:webupd8team/java
+sudo apt-get update
+sudo apt-get install oracle-java8-installer
+sudo wget
+http://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.4.4.deb
+sudo dpkg -i elasticsearch-1.4.4.deb
+sudo su -
+echo "cluster.name: elasticsearch" >> /etc/elasticsearch/elasticsearch.yml
+echo 'node.name: "dcc-es-1"' >> /etc/elasticsearch/elasticsearch.yml
+echo "script.disable_dynamic: false" >> /etc/elasticsearch/elasticsearch.yml
+echo "ES_HEAP_SIZE=12g" >> /etc/default/elasticsearch
+exit
+
+In /etc/elasticsearch/elasticsearch.yml, change node.name to 'dcc-es-1' through
+'dcc-es-4' for each node.
+
+sudo /usr/share/elasticsearch/bin/plugin -url http://bit.ly/29A1hsz -install
+knapsack
+sudo service elasticsearch start
+
+After start up of all four, check that nodes connected properly into same
+cluster:
+curl -XGET localhost:9200/_nodes/_all/name/?pretty
+
+to install head monitoring:
+
+    /usr/share/elasticsearch/bin/plugin -install mobz/elasticsearch-head
+
+    open http://localhost:9200/_plugin/head/
 ```
