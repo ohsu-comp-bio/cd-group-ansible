@@ -26,6 +26,15 @@
        flavor: acc.half
        network: "{{ os_network }}"
     with_items: ["1", "2", "3"]
+  - name: create DCC portal UI server
+    os_server:
+       state: present
+       name: "dcc-portal-blue"
+       image: "Ubuntu 14.04"
+       key_name: "{{ os_key }}"
+       flavor: m1.medium
+       network: "{{ os_network }}"
+       floating_ips: ["{{ dcc_portal_ip }}"]
   - name: create monitor
     os_server:
        state: present
