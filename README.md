@@ -58,7 +58,7 @@ sudo su -
 echo "cluster.name: elasticsearch" >> /etc/elasticsearch/elasticsearch.yml
 echo 'node.name: "dcc-es-1"' >> /etc/elasticsearch/elasticsearch.yml
 echo "script.disable_dynamic: false" >> /etc/elasticsearch/elasticsearch.yml
-echo "ES_HEAP_SIZE=12g" >> /etc/default/elasticsearch
+echo "ES_HEAP_SIZE=12g" >> /etc/default/dcc-es-1_elasticsearch
 exit
 
 In /etc/elasticsearch/elasticsearch.yml, change node.name to 'dcc-es-1' through
