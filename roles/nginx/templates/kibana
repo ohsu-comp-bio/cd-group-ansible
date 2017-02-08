@@ -3,6 +3,6 @@ server {
     server_name localhost;
 
     location / {
-        proxy_pass http://10.60.60.153:5601;
+        proxy_pass http://{{ monitor_private_IP }}:5601;
     }
 }

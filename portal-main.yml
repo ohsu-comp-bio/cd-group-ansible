@@ -7,9 +7,10 @@
     - "vars/main.yml"
   vars:
     - source_control_private_IP: "{{ hostvars[lookup('inventory_hostnames', 'source-control')].openstack.private_v4 }}"
+    - monitor_private_IP: "{{ hostvars[lookup('inventory_hostnames', 'monitor')].openstack.private_v4 }}"
   roles:
     - jdk
     - source-control
     - kafka-manager
     - kafka-monitor
-      #- nginx
+    - nginx
