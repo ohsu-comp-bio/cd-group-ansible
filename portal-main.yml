@@ -3,9 +3,13 @@
   hosts: portal-main
   remote_user: ubuntu
   become: yes
+  vars_files:
+    - "vars/main.yml"
+  vars:
+    - source_control_private_IP: "{{ hostvars[lookup('inventory_hostnames', 'source-control')].openstack.private_v4 }}"
   roles:
     - jdk
     - source-control
     - kafka-manager
     - kafka-monitor
-    - nginx
+      #- nginx

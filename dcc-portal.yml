@@ -25,7 +25,7 @@
     command: /usr/share/elasticsearch/bin/plugin --install mobz/elasticsearch-head/1.x
     ignore_errors: true # this task fails if the plugin is already installed, so we ignore errors for repeatability 
 - name: Kibana monitor
-  hosts: dcc-monitor
+  hosts: monitor
   remote_user: ubuntu
   become: true
   roles:
