@@ -43,6 +43,15 @@
        key_name: "{{ os_key }}"
        flavor: m1.xlarge
        network: "{{ os_network }}"
+  - name: create wiki host
+    os_server:
+       state: present
+       name: cd-green
+       image: "Ubuntu 14.04"
+       key_name: "{{ os_key }}"
+       flavor: acc.quarter
+       network: "{{ os_network }}"
+       floating_ips: ["{{ cd_green_ip }}"]
   - name: create source control instance
     os_server:
        state: present
