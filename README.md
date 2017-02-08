@@ -2,20 +2,21 @@
 This repository has configuration files for the CD Group project.  This
 includes a developer portal, and Spark and HDFS clusters for DCC ETL.
 
-The ansible playbook resources.yml creates OpenStack instances.  site.yml configures software and
-services on those instances. The playbooks are separate because there isn't a
-good way to wait for the availability of new OpenStack instances, and so that
+The ansible playbook instances.yml creates OpenStack instances.  site.yml configures software and
+services on those instances. The configuration playbooks are separate from the instance creation playbook
+ because there isn't a
+good way for ansible to wait the availability of new OpenStack instances, and so that
 site servers could be configured on non-OpenStack machines as well. 
 
 Copy vars/main.yml.example to vars/main.yml and set the variables for your
 environment.  To setup all machines and services, run
 
 ```
-   ansible-playbook resources.yml
+   ansible-playbook instances.yml
    ansible-playbook site.yml
 ```
 site.yml includes several playbooks, such as etl.yml, which can be run
-independently.
+independently. For example,
 ```
    ansible-playbook etl.yml
 ```
@@ -37,7 +38,7 @@ Some key locations for the installed services are
 
 ```
 DCC uses an old version of Elasticsearch that is not supported by the role
-available in ansible galaxy.  Currently node setup is done manually:
+available in ansible galaxy.  Currently DCC Elasticsearch node setup is done manually:
 ```
 Elasticsearch Cluster
 names: dcc-es-1 through dcc-es-4
