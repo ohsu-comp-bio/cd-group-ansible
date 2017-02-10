@@ -10,6 +10,7 @@
     - monitor_private_IP: "{{ hostvars[lookup('inventory_hostnames', 'monitor')].openstack.private_v4 }}"
     - cd_green_private_IP: "{{ hostvars[lookup('inventory_hostnames', 'cd-green')].openstack.private_v4 }}"
     - dcc_es_private_IP: "{{ hostvars[lookup('inventory_hostnames', 'dcc-es-3')].openstack.private_v4 }}"
+    - spark_master_private_IP: "{{ hostvars[lookup('inventory_hostnames', 'dcc-etl-2')].openstack.private_v4 }}"
   roles:
     - jdk
     - source-control
