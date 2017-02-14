@@ -16,7 +16,7 @@
 - name: add HDFS datanode hostnames to /etc/hosts
   lineinfile:
     dest: /etc/hosts
-    regexp: "{{ item }}"
+    regexp: "{{ item }}$"
     line: "{{ hostvars[lookup('inventory_hostnames', item )].openstack.private_v4 }} {{ item }}"
   with_items: "{{ groups['dcc_spark_workers'] }}"
 
