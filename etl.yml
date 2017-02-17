@@ -12,6 +12,8 @@
     - { role: spark, master: True }
     - { role: hdfs, hdfs_namenode: True}
     - rsyslog-elasticsearch
+    - stats-collection
+    - ntp
 
 # Spark workers and HDFS data nodes
 - hosts: dcc_spark_workers
@@ -23,4 +25,6 @@
     - jdk
     - { role: spark, master: False}
     - { role: hdfs, hdfs_namenode: False}
+    - stats-collection
+    - ntp
 

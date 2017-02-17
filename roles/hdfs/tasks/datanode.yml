@@ -13,6 +13,29 @@
     regexp: ^export JAVA_HOME
     line: export JAVA_HOME={{ jdk_home }}
 
+- name: Raise open file limits
+  lineinfile:
+    dest: /etc/security/limits.conf
+    regexp: ^hadoop hard
+    line: hadoop hard nofile 16384
+
+- name: Raise open file limits
+  lineinfile:
+    dest: /etc/security/limits.conf
+    regexp: ^hadoop soft
+    line: hadoop soft nofile 16384
+
+- name: Raise open file limits
+  lineinfile:
+    dest: /etc/pam.d/common-session
+    regexp: pam_limits.so
+    line: session required pam_limits.so
+
+- name: Raise open file limits
+  lineinfile:
+    dest: /etc/pam.d/common-session-noninteractive
+    regexp: pam_limits.so
+    line: session required pam_limits.so
 
 - name: Configure Hadoop HDFS DataNode
   template: src={{ item }}.xml.j2 dest={{ hdfs_conf_dir }}/{{ item | replace("datanode-", "") }}.xml

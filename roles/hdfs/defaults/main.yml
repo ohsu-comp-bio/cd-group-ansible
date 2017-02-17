@@ -4,10 +4,6 @@ hdfs_cloudera_distribution: "cdh5.3.1"
 hdfs_conf_dir: "/etc/hadoop/conf"
 hdfs_lib_dir: "/usr/lib/hadoop/lib"
 hdfs_namenode: False
-# get the private ipv4 address from the dynamic inventory.  Can also use
-# hostvars[lookup('inventory_hostnames', 'dcc-hdfs-namenode')].openstack.private_v4
-# hostvars[lookup('inventory_hostnames', 'dcc-hdfs-namenode')].ansible_all_ipv4_addresses[0]
-#
 hdfs_namenode_host: "dcc-etl-2"
 hdfs_namenode_port: 8020
 hdfs_disks: [{ mount_point: '/dfs/data', device: '/dev/sda1' }]
@@ -20,8 +16,14 @@ hdfs_namenode_properties:
   # https://hadoop.apache.org/docs/r1.2.1/hdfs_permissions_guide.html#Configuration+Parameters
   - { name: "dfs.permissions.superusergroup", value: "hadoop" }
   - { name: "dfs.namenode.name.dir", value: "/media/persistent0" }
+  - { name: "dfs.replication", value: "1" }
+  # set handler threads to min(20*log2(cluster size), 200)
+  # https://community.hortonworks.com/questions/63511/namenode-handler-count.html
+  - { name: "dfs.namenode.handler.count", value: 70 }
+jdk_home: /usr/lib/jvm/java-8-oracle/
 hdfs_datanode_properties:
   - { name: "dfs.permissions.superusergroup", value: "hadoop" }
   - { name: "dfs.datanode.data.dir", value: "{{ hdfs_disks | map(attribute='mount_point') | join(',') }}" }
+  - { name: "dfs.datanode.max.transfer.threads", value: "1000" }
 jdk_home: /usr/lib/jvm/java-8-oracle/
 

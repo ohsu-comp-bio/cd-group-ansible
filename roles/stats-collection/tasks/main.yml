@@ -1,0 +1,6 @@
+---
+- name: install collectl
+  apt: name=collectl
+
+- name: install htop
+  apt: name=htop
