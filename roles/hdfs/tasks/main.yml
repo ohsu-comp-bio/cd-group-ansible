@@ -26,6 +26,19 @@
     regexp: "dcc-etl-2"
     line: "{{ hostvars[lookup('inventory_hostnames', 'dcc-etl-2' )].openstack.private_v4 }} dcc-etl-2"
 
+- name: Raise open file limits
+  lineinfile:
+    dest: /etc/security/limits.d/hdfs.conf
+    regexp: "^hdfs   - nofile"
+    line: "hdfs   - nofile 65536"
+
+- name: Raise open file limits
+  lineinfile:
+    dest: "/etc/pam.d/{{ item }}"
+    regexp: pam_limits.so
+    line: session required pam_limits.so
+  with_items: ['common-session', 'common-session-noninteractive']
+
 - { include: datanode.yml, when: not hdfs_namenode }
 - { include: namenode.yml, when: hdfs_namenode }
 

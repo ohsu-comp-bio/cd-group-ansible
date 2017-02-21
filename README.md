@@ -24,6 +24,7 @@ Some key locations for the installed services are
 ```
    HDFS:
    /usr/lib/hadoop-hdfs/
+   /usr/lib/hadoop/lib/native
    /etc/hadoop/
    /var/log/hadoop-hdfs/
 
