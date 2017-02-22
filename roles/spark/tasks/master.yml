@@ -1,5 +1,11 @@
 
 - name: Configure Spark Master
+  template: src=spark-defaults.conf.j2 dest=/srv/{{ spark_archive_output }}/conf/spark-defaults.conf
+
+- name: Configure Spark Master
+  template: src=spark-env.sh.j2 dest=/srv/{{ spark_archive_output }}/conf/spark-env.sh mode="u=rwx,g=r,o=r"
+
+- name: Configure Spark Master
   template: src=slaves.j2 dest=/srv/{{ spark_archive_output }}/conf/slaves
   #  notify:
   #  - Start Spark Master

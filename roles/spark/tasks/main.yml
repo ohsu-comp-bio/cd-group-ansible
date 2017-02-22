@@ -14,7 +14,7 @@
             mode=0444
 
 - name: Extract the dist
-  unarchive:  
+  unarchive:
     src: "{{ install_dir }}/{{ spark_archive }}"
     dest: "{{ install_dir }}"
     copy: no
@@ -34,8 +34,8 @@
   lineinfile:
     dest: /etc/hosts
     regexp: "dcc-spark-worker-{{ item }}"
-    line: "{{ hostvars[lookup('inventory_hostnames', 'dcc-spark-worker-' + item )].openstack.private_v4 }} {{ 'dcc-spark-worker-' + item }}"
-  with_items: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
+    line: "{{ hostvars[lookup('inventory_hostnames', item )].openstack.private_v4 }} {{ item }}"
+  with_items: "{{ groups['dcc_spark_workers'] }}"
 
 - { include: master.yml, when: master }
 - { include: worker.yml, when: not master }

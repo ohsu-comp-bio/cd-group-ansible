@@ -4,12 +4,12 @@
 # Copy it as spark-env.sh and edit that to configure Spark for your site.
 
 export HADOOP_CONF_DIR=${HADOOP_CONF_DIR:-/etc/hadoop/conf}
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/cloudera/parcels/GPLEXTRAS/lib/hadoop/lib/native:/opt/cloudera/parcels/CDH/lib/hadoop/lib/native
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/hadoop/lib/native:/opt/cloudera/parcels/GPLEXTRAS/lib/hadoop/lib/native:/opt/cloudera/parcels/CDH/lib/hadoop/lib/native
 export JAVA_LIBRARY_PATH=$JAVA_LIBRARY_PATH:/opt/cloudera/parcels/GPLEXTRAS/lib/hadoop/lib/native:/opt/cloudera/parcels/CDH/lib/hadoop/lib/native
 export SPARK_CLASSPATH=$SPARK_CLASSPATH:{{ spark_lib_dir }}/hadoop-lzo.jar
 export SPARK_PRINT_LAUNCH_COMMAND=1
 
-# Options read when launching programs locally with 
+# Options read when launching programs locally with
 # ./bin/run-example or ./bin/spark-submit
 # - HADOOP_CONF_DIR, to point Spark towards Hadoop configuration files
 # - SPARK_LOCAL_IP, to set the IP address Spark binds to on this node
@@ -39,7 +39,7 @@ export SPARK_PRINT_LAUNCH_COMMAND=1
 # - SPARK_MASTER_PORT / SPARK_MASTER_WEBUI_PORT, to use non-default ports for the master
 # - SPARK_MASTER_OPTS, to set config properties only for the master (e.g. "-Dx=y")
 # - SPARK_WORKER_CORES, to set the number of cores to use on this machine
-export SPARK_WORKER_CORES=3
+export SPARK_WORKER_CORES=4
 export SPARK_DAEMON_MEMORY=30g
 export SPARK_WORKER_MEMORY=30g
 # - SPARK_WORKER_MEMORY, to set how much total memory workers have to give executors (e.g. 1000m, 2g)

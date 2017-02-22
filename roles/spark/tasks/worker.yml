@@ -11,7 +11,7 @@
     version: 0.4.20
     dest: "{{ hdfs_lib_dir }}/hadoop-lzo.jar"
 
-- name: Configure Spark Worker 
+- name: Configure Spark Worker
   template: src=spark-defaults.conf.j2 dest=/srv/{{ spark_archive_output }}/conf/spark-defaults.conf
 
 - name: Configure Spark Worker
