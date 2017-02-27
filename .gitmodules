@@ -10,3 +10,9 @@
 [submodule "roles/elasticsearch"]
 	path = roles/elasticsearch
 	url = https://github.com/elastic/ansible-elasticsearch.git
+[submodule "roles/deimostr.graphite"]
+	path = roles/deimostr.graphite
+	url = https://github.com/deimosfr/ansible-graphite.git
+[submodule "roles/ANXS.postgresql"]
+	path = roles/ANXS.postgresql
+	url = https://github.com/ANXS/postgresql.git
