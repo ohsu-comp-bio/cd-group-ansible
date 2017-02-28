@@ -14,6 +14,7 @@ hdfs_namenode_properties:
   # need to add user submitting job to the "hadoop" group, or turn filesystem
   # security off.
   # https://hadoop.apache.org/docs/r1.2.1/hdfs_permissions_guide.html#Configuration+Parameters
+  - { name: "dfs.blocksize", value: 134217728 } # 128*1024*1024
   - { name: "dfs.permissions.superusergroup", value: "hadoop" }
   - { name: "dfs.namenode.name.dir", value: "/media/persistent0" }
   - { name: "dfs.replication", value: "1" }
