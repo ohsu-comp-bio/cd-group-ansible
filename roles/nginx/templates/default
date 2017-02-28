@@ -40,4 +40,13 @@ server {
         proxy_redirect off;
         proxy_pass http://{{ spark_master_private_IP }}:8080;
     }
+
+    location /ohsu-server-8000/ {
+        proxy_pass http://10.60.60.59:8000/;
+    }
+
+    location /ohsu-server-9000/ {
+        proxy_pass http://10.60.60.59:9000/;
+    }
+
 }
