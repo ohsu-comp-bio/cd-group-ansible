@@ -34,6 +34,10 @@ Some key locations for the installed services are
    DCC ETL
    /mnt/etl/dcc-release/
 
+   Elasticsearch
+   /etc/init.d/dcc-es-3_elasticsearch 
+   /opt/elasticsearch/logs/
+   
    kibana
    /etc/kibana/kibana.yml
 

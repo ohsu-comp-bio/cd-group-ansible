@@ -5,6 +5,7 @@
   become: yes
   vars_files:
     - "vars/main.yml"
+    - "vars/secrets.yml"
   roles:
     - jdk
     - { role: elasticsearch,
@@ -19,13 +20,22 @@
           node.name: "{{ ansible_hostname }}",
           cluster.name: "monitor-es",
           http.host: "{{ ansible_default_ipv4.address }}"
-        }
+        },
+      force_install: true
       }
     - { role: kibana,
         kibana_elasticsearch_url: "http://{{ ansible_default_ipv4.address }}:9200", # e.g. "http://tempuri.org:9200"
         kibana_server_host: "{{ ansible_default_ipv4.address }}"
       }
     - { role: rsyslog-elasticsearch, monitor_host: "{{ ansible_default_ipv4.address }}" }
+    - ANXS.postgresql
+    - { role: deimosfr.graphite,
+        graphite_db_backend: postgresql_psycopg2,
+        graphite_db_port: 5432,
+        graphite_admin_email: kibri@ohsu.edu,
+        uwsgi_socket: "0.0.0.0:3031"
+      }
+
   vars:
     es_java_install: false
   tasks:
