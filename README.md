@@ -41,6 +41,9 @@ Some key locations for the installed services are
    kibana
    /etc/kibana/kibana.yml
 
+   graphite
+   /etc/carbon/carbon.conf
+   /var/log/carbon
 ```
 DCC uses an old version of Elasticsearch that is not supported by the role
 available in ansible galaxy.  Currently DCC Elasticsearch node setup is done manually:

@@ -15,9 +15,9 @@
 - name: Install bower
   npm: name=bower global=yes
 
-- file: 
-    path: /mnt/git/kafka-simple-monitor 
-    owner: ubuntu 
+- file:
+    path: /mnt/git/kafka-simple-monitor
+    owner: ubuntu
     group: ubuntu
     recurse: yes
 

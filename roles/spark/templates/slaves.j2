@@ -1,4 +1,5 @@
 # Copyright 2016(c) The Ontario Institute for Cancer Research. All rights reserved.
-{% for i in range(10) %}
+# TODO: get list of workers from spark_worker group.
+{% for i in range(12) %}
 dcc-spark-worker-{{ i+1 }}
 {% endfor %}
