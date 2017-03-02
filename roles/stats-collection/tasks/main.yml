@@ -2,5 +2,27 @@
 - name: install collectl
   apt: name=collectl
 
+- name: disable collection by default
+  service:
+    name: collectl
+    state: stopped
+    enabled: no
+
+# http://collectl.sourceforge.net/Graphite.html
+# collectl
+#   -F <seconds>        flush
+#   -s <subsystem>
+#      C        CPU detail
+#      n        network
+#      d        disk
+#      m        memory
+#   -export graphite,
+#     r=seconds   randomized wait of up to 'r' seconds before submitting
+- name: set collectl to forward stats to graphite.
+  lineinfile:
+    name: /etc/collectl.conf
+    regexp: '^DaemonCommands'
+    line: 'DaemonCommands = -F60 -s Cndm --export graphite,10.60.60.243,r=2'
+
 - name: install htop
   apt: name=htop
