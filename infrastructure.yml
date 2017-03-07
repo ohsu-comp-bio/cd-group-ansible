@@ -32,10 +32,9 @@
     - { role: deimosfr.graphite,
         graphite_db_backend: postgresql_psycopg2,
         graphite_db_port: 5432,
-        graphite_admin_email: kibri@ohsu.edu,
         uwsgi_socket: "0.0.0.0:3031"
       }
-
+     - ntp
   vars:
     es_java_install: false
   tasks:
