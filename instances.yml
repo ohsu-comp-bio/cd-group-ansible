@@ -25,7 +25,7 @@
        key_name: "{{ os_key }}"
        flavor: acc.half
        network: "{{ os_network }}"
-    with_items: ["1", "2", "3"]
+    with_items: ["1", "2", "3", "4"]
   - name: create DCC portal UI server
     os_server:
        state: present
