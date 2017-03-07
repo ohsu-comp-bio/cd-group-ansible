@@ -34,7 +34,7 @@
         graphite_db_port: 5432,
         uwsgi_socket: "0.0.0.0:3031"
       }
-     - ntp
+    - ntp
   vars:
     es_java_install: false
   tasks:
@@ -42,19 +42,3 @@
     command: /usr/share/elasticsearch/bin/plugin --install mobz/elasticsearch-head/1.x
     ignore_errors: true # this task fails if the plugin is already installed, so we ignore errors for repeatability
 
-# kafka will need a certificate for TLS
-# keytool -keystore roles/kafka-security/files/kafka.keystore.jks -alias
-# localhost -validity 365 -genkey
-- hosts: kafka
-  remote_user: ubuntu
-  become: yes
-  roles:
-    - jdk
-    - role: AnsibleShipyard.ansible-zookeeper
-      zookeeper_hosts:
-        - host: kafka
-          id: 1
-    - role: ansible-kafka
-      kafka_hosts: [kafka]
-      kafka_zookeeper_hosts: [kafka]
-      healthcheck_address: kafka
