@@ -21,6 +21,7 @@ hdfs_namenode_properties:
   # set handler threads to min(20*log2(cluster size), 200)
   # https://community.hortonworks.com/questions/63511/namenode-handler-count.html
   - { name: "dfs.namenode.handler.count", value: 70 }
+  - { name: "dfs.client.socket-timeout", value: 120000 } # default is 60000
 jdk_home: /usr/lib/jvm/java-8-oracle/
 hdfs_datanode_properties:
   - { name: "dfs.permissions.superusergroup", value: "hadoop" }
