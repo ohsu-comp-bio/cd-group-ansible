@@ -10,19 +10,31 @@
 
 # http://collectl.sourceforge.net/Graphite.html
 # collectl
+#   -i <interval>       data collection interval
 #   -F <seconds>        flush
 #   -s <subsystem>
-#      C        CPU detail
-#      n        network
-#      d        disk
-#      m        memory
+#      i                inodes
+#      C                CPU detail
+#      n                network
+#      d                disk
+#      m                memory
+#      N                network detail
+#      s                sockets
+#      t                tcp
 #   -export graphite,
 #     r=seconds   randomized wait of up to 'r' seconds before submitting
 - name: set collectl to forward stats to graphite.
   lineinfile:
     name: /etc/collectl.conf
     regexp: '^DaemonCommands'
-    line: 'DaemonCommands = -F60 -s Cndm --export graphite,10.60.60.243,r=2'
+    line: 'DaemonCommands = -sCdiNms --export graphite,10.60.60.243'
+
+- name: set collectl collection interval
+  lineinfile:
+    name: /etc/collectl.conf
+    regexp: '^Interval'
+    insertafter: '^#Interval3 ='
+    line: 'Interval =     1'
 
 - name: install htop
   apt: name=htop
