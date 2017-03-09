@@ -1,0 +1,7 @@
+---
+- name: git dcc-portal-server
+  git:
+    repo=https://github.com/ohsu-comp-bio/dcc-portal.git
+    version=feature/branding-ohsu
+    dest=~/dcc-portal
+    accept_hostkey=yes

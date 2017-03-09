@@ -5,7 +5,7 @@
   remote_user: ubuntu
   become: true
   roles:
-    - java
+    - jdk
     - { role: elasticsearch, 
         es_major_version: "1.4",
         es_version: "1.4.4",
@@ -29,8 +29,13 @@
   remote_user: ubuntu
   become: true
   roles:
-    - java
+    - jdk
     - { role: kibana,
         kibana_version: "4.1", 
         kibana_elasticsearch_url: "{{ kibana_elasticsearch_url }}" # e.g. "http://tempuri.org:9200"
       }
+- name: dcc-portal-server
+  hosts: dcc-portal-blue
+  remote_user: ubuntu
+  roles:
+    - dcc-portal-server
