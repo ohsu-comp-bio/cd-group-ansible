@@ -1,7 +1,46 @@
 ---
 - name: git dcc-portal-server
+  become_user: ubuntu
   git:
     repo=https://github.com/ohsu-comp-bio/dcc-portal.git
-    version=feature/branding-ohsu
+    version=ohsu-proxy
     dest=~/dcc-portal
     accept_hostkey=yes
+
+- name: build dcc-portal-server
+  become_user: ubuntu
+  command: mvn -am
+  args:
+    chdir: ~/dcc-portal/dcc-portal-server
+
+- name: install dcc-portal-server 1
+  file: path=/opt/server state=directory owner=ubuntu group=ubuntu
+
+- name: install dcc-portal-server 2
+  become_user: ubuntu
+  unarchive:
+    src: /home/ubuntu/dcc-portal/dcc-portal-server/target/dcc-portal-server-4.3.27-SNAPSHOT-dist.tar.gz
+    dest: /opt/server
+    remote_src: yes
+
+- name: configure dcc-portal-server 1
+  template:
+    src: application.yml.j2
+    dest: /opt/server/dcc-portal-server-4.3.27-SNAPSHOT/conf/application.yml
+    owner: ubuntu
+    group: ubuntu
+ 
+- name: configure dcc-portal-server 2
+  template:
+    src: wrapper.conf.j2
+    dest: /opt/server/dcc-portal-server-4.3.27-SNAPSHOT/conf/wrapper.conf
+    owner: ubuntu
+    group: ubuntu
+ 
+ 
+- name: start dcc-portal-server
+  become_user: ubuntu
+  command: bin/dcc-portal-server restart
+  args:
+    chdir: /opt/server/dcc-portal-server-4.3.27-SNAPSHOT
+ 
