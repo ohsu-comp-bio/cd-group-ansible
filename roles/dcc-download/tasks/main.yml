@@ -1,0 +1,57 @@
+---
+- name: git dcc-download
+  become_user: ubuntu
+  git:
+    repo=https://github.com/ohsu-comp-bio/dcc-download.git
+    version=develop
+    dest=~/dcc-download
+    accept_hostkey=yes
+
+- name: build dcc-download
+  become_user: ubuntu
+  command: mvn -am -pl dcc-download-server package
+  args:
+    chdir: ~/dcc-download
+
+- name: install dcc-download 1
+  file: path=/opt/server state=directory owner=ubuntu group=ubuntu
+
+- name: install dcc-download 2
+  become_user: ubuntu
+  unarchive:
+    src: /home/ubuntu/dcc-download/dcc-download-server/target/dcc-download-server-4.3.12-SNAPSHOT-dist.tar.gz
+    dest: /opt/server
+    remote_src: yes
+
+- name: configure dcc-download 1
+  vars:
+    exports_path: "/bwalsh-release/es_export" 
+    hadoop_default_fs: "hdfs://10.60.60.55:8020"
+    mongo_uri: "mongodb://10.60.60.55:27017/dcc-download"
+    input_dir: "/bwalsh-release/download"
+  template:
+    src: application.yml.j2
+    dest: /opt/server/dcc-download-server-4.3.12-SNAPSHOT/conf/application.yml
+    owner: ubuntu
+    group: ubuntu
+
+
+- name: configure dcc-download 2
+  vars:
+    sprint_profile: "development"
+  template:
+    src: wrapper.conf.j2
+    dest: /opt/server/dcc-download-server-4.3.12-SNAPSHOT/conf/wrapper.conf
+    owner: ubuntu
+    group: ubuntu
+
+
+- name: start dcc-download
+  become_user: ubuntu
+  command: bin/dcc-download-server restart 
+  register: start_output
+  args:
+    chdir: /opt/server/dcc-download-server-4.3.12-SNAPSHOT
+
+
+
