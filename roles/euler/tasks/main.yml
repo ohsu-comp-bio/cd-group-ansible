@@ -1,0 +1,61 @@
+---
+
+- name: prep euler
+  file: path=/opt/server state=directory owner=ubuntu group=ubuntu
+
+#- name: ensure github is a known host
+#  action: sshknownhosts host=github.com state=present 
+
+- name: git euler
+  become_user: ubuntu
+  git:
+    repo=https://github.com/ohsu-comp-bio/euler
+    version=nginx
+    dest=/opt/server/euler
+    accept_hostkey=yes
+    recursive=yes
+    force=yes
+
+- name: configure euler
+  vars:
+    admin_token: "294a4c8a8a475f9b9836"
+    admin_project_name: "admin"
+    admin_user_name: "admin"
+    admin_domain_name: "Default"
+    admin_domain_id: "default"
+    admin_password: "ADMIN_PASS"
+    admin_email: "walsbr@ohsu.edu"
+    admin_region_id: "ohsu"
+    admin_role_name: "admin"
+    ohsu_admin_ldap_cn: "svcCCCdevLDAP"
+    ohsu_admin_ldap_password: 'hM*EUJYWpP3Z3g2uPwU\&xfbyh'
+    proxy_target: "http://localhost:8000"
+    elastic_host: "elastic"
+    elastic_port: "9200"
+    api_port: "8000"
+    api_debug: "1"
+    api_host: "0.0.0.0"
+    api_url: "http://api:8000"
+    mongo_host: "mongo"
+    mongo_port: "27017"
+    mongo_dbname: "test"
+    mongo_username: ""
+    mongo_password: ""
+    authenticator_secret: "FBB636BAC938CEBAC352ED82A5E6D"
+    euler_api_url: "http://api:8000/v0/files"
+    portal_port: "9000"
+    cert_dir_path: "/home/ubuntu/euler/compbio-tls"
+    key_path: "/certs/wild.compbio.ohsu.edu.key"
+    cert_path: "/certs/compbio_ohsu_edu_cert.cer"
+  template:
+    src: env.j2
+    dest: /opt/server/euler/.env
+    owner: ubuntu
+    group: ubuntu
+ 
+- name: start euler
+  become_user: ubuntu
+  command: docker-compose -f docker-compose.yml -f docker-compose-openstack.yml -f docker-compose-dcc.yml up -d 
+  args:
+    chdir: /opt/server/euler
+ 
