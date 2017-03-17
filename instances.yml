@@ -41,7 +41,7 @@
        name: "dcc-api-dev"
        image: "Ubuntu 14.04"
        key_name: "{{ os_key }}"
-       flavor: m1.medium
+       flavor: m1.large
        network: "{{ os_network }}"
        floating_ips: ["{{ dcc_api_dev_ip }}"]
   - name: create monitor
