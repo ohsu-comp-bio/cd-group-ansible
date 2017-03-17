@@ -3,18 +3,11 @@
 - name: prep euler
   file: path=/opt/server state=directory owner=ubuntu group=ubuntu
 
-#- name: ensure github is a known host
-#  action: sshknownhosts host=github.com state=present 
-
 - name: git euler
   become_user: ubuntu
-  git:
-    repo=https://github.com/ohsu-comp-bio/euler
-    version=nginx
-    dest=/opt/server/euler
-    accept_hostkey=yes
-    recursive=yes
-    force=yes
+  shell: git clone https://github.com/ohsu-comp-bio/euler.git ; cd euler;  git checkout nginx ; git submodule update --init --recursive --remote
+  args:
+    chdir: /opt/server
 
 - name: configure euler
   # see vars/main.yml
@@ -23,10 +16,37 @@
     dest: /opt/server/euler/.env
     owner: ubuntu
     group: ubuntu
- 
+
+- name: Prep certs
+  file: path=/opt/server/euler/certs state=directory owner=ubuntu group=ubuntu
+
+- debug:
+    var: wild_compbio_ohsu_edu
+    verbosity: 2
+
+- debug:
+    var: compbio_ohsu_edu_cert
+    verbosity: 2
+
+#- name: Copy certs 1
+- copy:
+    dest: /opt/server/euler/certs/wild.compbio.ohsu.edu.key
+    content: "{{ wild_compbio_ohsu_edu }}"
+    owner: ubuntu
+    group: ubuntu
+  #no_log: true
+
+#- name: Copy certs 2
+- copy:
+    dest: /opt/server/euler/certs/compbio_ohsu_edu_cert.cer
+    content: "{{ compbio_ohsu_edu_cert }}"
+    owner: ubuntu
+    group: ubuntu
+#no_log: true
+
 - name: start euler
   become_user: ubuntu
-  command: docker-compose -f docker-compose.yml -f docker-compose-openstack.yml -f docker-compose-dcc.yml up -d 
+  command: docker-compose -f docker-compose.yml -f docker-compose-dcc.yml -f docker-compose-openstack.yml up -d
   args:
     chdir: /opt/server/euler
  
