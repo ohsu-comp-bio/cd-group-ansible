@@ -5,14 +5,17 @@
   become: yes
   vars_files:
     - "vars/main.yml"
+    - "vars/secrets.yml"
   vars:
     - maven_version:  '3.0.5'
     # SHA256 sum for the redistributable package (i.e. apache-maven-{{ maven_version }}-bin.tar.gz)
     # https://archive.apache.org/dist/maven/maven-3/3.0.5/binaries/apache-maven-3.0.5-bin.tar.gz.asc
     - maven_redis_sha256sum: 'd98d766be9254222920c1d541efd466ae6502b82a39166c90d65ffd7ea357dd9'
     - docker_group_members: ['ubuntu']
-    #- docker_opts: "--storage-driver=overlay2"
+    - docker_opts: "--storage-driver=overlay"
+
   roles:
+    - ubuntu-kernel-update
     - jdk
     - geerlingguy.git
     - gantsign.maven
