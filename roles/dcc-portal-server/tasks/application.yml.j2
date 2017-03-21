@@ -19,13 +19,12 @@ server:
 
 # Datasource
 spring.datasource:
-  driver-class-name: org.h2.Driver
-  url: jdbc:h2:mem:portal;MODE=PostgreSQL;DB_CLOSE_DELAY=-1;INIT=runscript from 'classpath:sql/schema.sql'
-  username:
-  password:
-  max-active: 10
-  max-idle: 1
-  min-idle: 1
+  driver-class-name: org.postgresql.Driver
+  url: "jdbc:postgresql://{{ postgresql_host }}/{{ postgresql_db_name}}"
+  username: "{{ postgresql_user_name }}"
+  password: "{{ postgresql_user_pass }}"
+  max-active: 32
+  validation-query: "/* Portal DB Health Check */ SELECT 1"
 
 # Authorization
 crowd:

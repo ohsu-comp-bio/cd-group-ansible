@@ -1,5 +1,5 @@
 
-- name: setup portal
+- name: setup portal api
   hosts: dcc-api-dev
   remote_user: ubuntu
   become: yes
@@ -19,6 +19,8 @@
     - jdk
     - geerlingguy.git
     - gantsign.maven
+    - ANXS.postgresql
+    - portal_db
     - dcc-portal-server
     - dcc-download
     - angstwad.docker_ubuntu
