@@ -10,3 +10,53 @@ source_control_ip:
 dcc_portal_ip:
 monitor_host:
 cd_green_ip:
+dcc_api_dev_ip:
+
+# euler
+# see vault for other variables
+dcc_api_port: 
+admin_email: 
+# this should be the ip@, not the floating ip@
+proxy_target: 
+elastic_host: 
+elastic_port: 
+api_port: 
+api_debug:
+api_host:
+api_url:
+mongo_host:
+mongo_port:
+mongo_dbname:
+mongo_username:
+mongo_password:
+euler_api_url:
+portal_port:
+cert_dir_path:
+key_path:
+cert_path:
+
+
+# euler- nginx
+ui_url:
+api_url:
+download_url:
+
+keystone_host_ip: "10.50.50.172"
+
+postgresql_version: 9.6
+
+
+postgresql_host: localhost
+postgresql_db_name: dcc-portal
+postgresql_databases:
+  - name: "{{ postgresql_db_name }}"
+    owner: dcc
+
+postgresql_users:
+  - name: "{{ postgresql_user_name }}"
+    pass: "{{ postgresql_user_pass }}"
+
+postgresql_user_privileges:
+  - name: dcc
+    db: dcc-portal
+

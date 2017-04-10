@@ -35,6 +35,15 @@
        flavor: m1.medium
        network: "{{ os_network }}"
        floating_ips: ["{{ dcc_portal_ip }}"]
+  - name: create DCC portal development API server
+    os_server:
+       state: present
+       name: "dcc-api-dev"
+       image: "Ubuntu 14.04"
+       key_name: "{{ os_key }}"
+       flavor: m1.large
+       network: "{{ os_network }}"
+       floating_ips: ["{{ dcc_api_dev_ip }}"]
   - name: create monitor
     os_server:
        state: present
@@ -80,3 +89,11 @@
       line: "{{ hostvars[lookup('inventory_hostnames', 'dcc-spark-worker-' + item )].openstack.private_v4 }} {{ 'dcc-spark-worker-' + item }}"
     become: True
     with_items: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']
+  - name: add /etc/hosts entries for api-dev
+    # needed for host IP resolution, because DNS is not installed in exastack
+    lineinfile:
+      dest: /etc/hosts
+      regexp: "{{ item }}$"
+      line: "{{ hostvars[lookup('inventory_hostnames', item )].openstack.private_v4 }} {{ item }}"
+    become: True
+    with_items: ['dcc-api-dev']
